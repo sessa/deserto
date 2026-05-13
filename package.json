@@ -1,0 +1,7 @@
+{
+  "name": "deserto",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Desert storage app — manage files with a minimal, desert-inspired experience",
+  "license": "MIT"
+}
