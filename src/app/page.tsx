@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -14,7 +15,16 @@ export default function Home() {
         />
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
+            Daily candy spinner:{" "}
+            <Link
+              className="font-semibold underline decoration-dotted underline-offset-4 hover:text-foreground"
+              href="/candy"
+            >
+              open the Candy room
+            </Link>
+            .
+          </li>
+          <li className="tracking-[-.01em]">
             <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
               src/app/page.tsx
             </code>
