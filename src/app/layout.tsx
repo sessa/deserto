@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Deserto",
-  description: "Desert-themed storage — calm, sparse file and asset management.",
+  title: "Daily Candy | Deserto",
+  description:
+    "Spin the candy wheel among today’s treats, choose what landed, and browse your dessert calendar.",
 };
 
 export default function RootLayout({

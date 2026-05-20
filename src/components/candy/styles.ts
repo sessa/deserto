@@ -24,8 +24,8 @@ const roseSpinAccent =
 
 export const spinButtonClass = `${ctaBase} ${roseSpinAccent}`;
 
-/** Round hub control on the prize wheel */
-export const spinCenterButtonClass = `inline-flex cursor-pointer items-center justify-center rounded-full font-extrabold tracking-tight text-white shadow-lg transition hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${roseSpinAccent}`;
+/** Round hub control on the prize wheel — avoid low opacity while busy (shows “…” during spin) */
+export const spinCenterButtonClass = `inline-flex cursor-pointer items-center justify-center rounded-full font-extrabold tracking-tight text-white shadow-lg transition hover:-translate-y-0.5 active:translate-y-0 aria-disabled:pointer-events-none aria-disabled:cursor-wait aria-disabled:shadow-inner focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${roseSpinAccent}`;
 
 const emeraldChooseAccent =
   "bg-gradient-to-b from-emerald-500 to-emerald-600 shadow-emerald-900/25 hover:from-emerald-400 hover:to-emerald-500 focus-visible:outline-emerald-400";

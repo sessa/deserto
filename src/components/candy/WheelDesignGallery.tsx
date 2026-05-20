@@ -493,7 +493,7 @@ export function WheelDesignGallery() {
             apply any of these to the live spinner.
           </p>
           <Link
-            href="/candy"
+            href="/"
             className="mt-4 inline-block text-sm font-bold text-rose-600 underline decoration-dotted underline-offset-4 hover:text-rose-500"
           >
             Back to Candy room

@@ -482,11 +482,13 @@ export const PrizeWheel = forwardRef<PrizeWheelHandle, PrizeWheelProps>(function
 
           <button
             type="button"
-            disabled={spinning}
             aria-busy={spinning}
+            aria-disabled={spinning}
             aria-label={spinning ? "Spinning" : "Spin the wheel"}
             onClick={() => spinOnce()}
-            className={`${spinCenterButtonClass} absolute left-1/2 top-1/2 z-[15] -translate-x-1/2 -translate-y-1/2`}
+            className={`${spinCenterButtonClass} absolute left-1/2 top-1/2 z-[15] -translate-x-1/2 -translate-y-1/2 ${
+              spinning ? "cursor-wait pointer-events-none" : ""
+            }`}
             style={{
               width: hubButtonPx,
               height: hubButtonPx,

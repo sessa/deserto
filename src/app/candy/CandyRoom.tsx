@@ -83,7 +83,10 @@ export default function CandyRoom() {
       <h1 className="mt-2 text-3xl font-extrabold tracking-[0.32em] text-purple-950 sm:text-4xl">
         DESERTO
       </h1>
-      <p className="mt-2 text-sm font-semibold text-purple-900/65">
+      <div className="mx-auto mt-4 w-full max-w-md">
+        <WheelDesignSelect value={wheelDesignId} onChange={handleWheelDesignChange} disabled={busy} />
+      </div>
+      <p className="mt-2 text-sm font-semibold text-purple-900/65 sm:mt-3">
         {daily.dateLabel}
       </p>
     </header>
@@ -112,8 +115,6 @@ export default function CandyRoom() {
           </p>
         </div>
       </div>
-
-      <WheelDesignSelect value={wheelDesignId} onChange={handleWheelDesignChange} disabled={busy} />
 
       <p className={`min-h-[1.25rem] text-center ${helperTextClass}`} role="status" aria-live="polite">
         {savedFlash
