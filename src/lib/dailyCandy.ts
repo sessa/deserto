@@ -1,3 +1,5 @@
+import type { TreatItem } from "@/data/candies";
+
 /** Local calendar day → YYYY-MM-DD */
 export function localDateKey(d: Date): string {
   const y = d.getFullYear();
@@ -41,24 +43,30 @@ function shuffleCopy<T>(items: readonly T[], rng: () => number): T[] {
   return out;
 }
 
-function trioFor(pool: readonly string[], dateKey: string, salt: number): string[] {
+export type TreatPick = TreatItem;
+
+function trioFor(
+  pool: readonly TreatPick[],
+  dateKey: string,
+  salt: number,
+): TreatPick[] {
   const seed = hashToSeed(`${dateKey}|${salt}`);
   const rng = mulberry32(seed);
   const shuffled = shuffleCopy(pool, rng);
   return shuffled.slice(0, 3);
 }
 
-function sameMultiset(a: string[], b: string[]): boolean {
+function sameMultiset(a: TreatPick[], b: TreatPick[]): boolean {
   if (a.length !== b.length) return false;
-  const sa = [...a].sort();
-  const sb = [...b].sort();
+  const sa = [...a.map((x) => x.label)].sort();
+  const sb = [...b.map((x) => x.label)].sort();
   return sa.every((v, i) => v === sb[i]);
 }
 
 const MAX_SALT_TRIES = 256;
 
 export type DailyCandyResult = {
-  picks: string[];
+  picks: TreatPick[];
   dateKey: string;
   dateLabel: string;
 };
@@ -69,7 +77,7 @@ export type DailyCandyResult = {
  */
 export function getDailyCandyOptions(
   now: Date,
-  pool: readonly string[],
+  pool: readonly TreatPick[],
 ): DailyCandyResult {
   const dateKey = localDateKey(now);
   const yesterdayKey = addCalendarDays(dateKey, -1);

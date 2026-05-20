@@ -1,3 +1,5 @@
+import type { TreatCategory } from "@/data/candies";
+
 export const STORAGE_KEY = "deserto_candy_picks_v1";
 
 export type PickRecord = {
@@ -5,6 +7,8 @@ export type PickRecord = {
   dateKey: string;
   label: string;
   savedAt: string;
+  /** Present for new saves; omitted for picks stored before categories existed. */
+  category?: TreatCategory;
 };
 
 export type PickMap = Record<string, PickRecord>;
@@ -22,11 +26,21 @@ export function loadPickMap(): PickMap {
   }
 }
 
-export function savePickForDay(dateKey: string, label: string): PickMap {
+export function savePickForDay(
+  dateKey: string,
+  label: string,
+  category?: TreatCategory,
+): PickMap {
   const map = loadPickMap();
+  const record: PickRecord = {
+    dateKey,
+    label,
+    savedAt: new Date().toISOString(),
+    ...(category ? { category } : {}),
+  };
   const next: PickMap = {
     ...map,
-    [dateKey]: { dateKey, label, savedAt: new Date().toISOString() },
+    [dateKey]: record,
   };
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   return next;
