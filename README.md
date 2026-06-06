@@ -1,6 +1,8 @@
 # Deserto
 
-Desert-themed storage app — manage files and assets with a calm, sparse UI inspired by arid landscapes.
+A project I'm working on with my daughter to teach her prompt engineering and AI — building a desert-themed storage app along the way.
+
+Deserto helps manage files and assets with a calm, sparse UI inspired by arid landscapes. We're using it as a hands-on way to learn how to work with AI tools, write effective prompts, and turn ideas into real software.
 
 Built with [Next.js](https://nextjs.org) (App Router), TypeScript, and Tailwind CSS v4.
 
