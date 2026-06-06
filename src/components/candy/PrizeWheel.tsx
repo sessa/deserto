@@ -78,13 +78,21 @@ function pickEndRotation(prev: number, targetIdx: number): number {
 }
 
 function splitWheelLabel(label: string): string[] {
-  const words = label.trim().split(/\s+/).filter(Boolean);
-  const lines: string[] = [];
+  const compact = label.trim().replace(/\s+/g, " ");
+  if (!compact) return ["—"];
 
+  const primary = compact.split(" — ")[0]?.trim() ?? compact;
+  const words = primary.split(/\s+/).filter(Boolean);
+
+  if (words.length <= 2 && primary.length <= 14) {
+    return [primary];
+  }
+
+  const lines: string[] = [];
   for (const word of words) {
     const current = lines[lines.length - 1] ?? "";
     const next = current ? `${current} ${word}` : word;
-    if (!current || next.length <= 11) {
+    if (!current || next.length <= 10) {
       lines[lines.length - 1] = next;
     } else if (lines.length < 2) {
       lines.push(word);
@@ -93,10 +101,16 @@ function splitWheelLabel(label: string): string[] {
     }
   }
 
-  return (lines.length ? lines : [label]).slice(0, 2).map((line) => {
-    if (line.length <= 13) return line;
+  const result = (lines.length ? lines : [primary]).slice(0, 2).map((line) => {
+    if (line.length <= 12) return line;
     return `${line.slice(0, 10)}…`;
   });
+
+  if (result.length === 2 && result[0].length + result[1].length > 22) {
+    return [`${primary.slice(0, 10)}…`];
+  }
+
+  return result;
 }
 
 export type PrizeWheelProps = {
