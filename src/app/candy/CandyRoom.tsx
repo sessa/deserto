@@ -132,10 +132,10 @@ export default function CandyRoom() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-3 py-3 sm:px-5 sm:py-5">
         <section className="flex min-h-[calc(100dvh-1.5rem)] flex-1 flex-col gap-3 sm:min-h-[calc(100dvh-2.5rem)] sm:gap-4 md:min-h-0 md:grid md:grid-cols-[minmax(0,1fr)_minmax(320px,380px)] md:items-stretch md:gap-4">
-          <div className="contents shrink-0 md:hidden">{titleHeader}</div>
+          <div className="order-1 shrink-0 md:col-start-2 md:row-start-1">{titleHeader}</div>
 
           <div
-            className={`${panelClass} flex min-h-0 min-w-0 flex-[2] flex-col overflow-visible p-2 sm:flex-1 sm:p-4 md:col-start-1 md:row-start-1 md:flex-none md:aspect-square md:max-h-[calc(100dvh-2.5rem)] md:self-start`}
+            className={`${panelClass} order-2 flex min-h-0 min-w-0 flex-[2] flex-col overflow-visible p-2 sm:flex-1 sm:p-4 md:col-start-1 md:row-start-1 md:row-span-2 md:flex-none md:aspect-square md:max-h-[calc(100dvh-2.5rem)] md:self-start`}
           >
             <div className="flex min-h-0 flex-1 flex-col gap-2.5 rounded-[1.4rem] bg-gradient-to-b from-white/75 via-white/55 to-violet-50/70 px-2 py-2 ring-1 ring-purple-950/5 sm:gap-3 sm:px-4 sm:py-5">
               {spinMetaStrip}
@@ -161,8 +161,7 @@ export default function CandyRoom() {
             </div>
           </div>
 
-          <aside className="hidden md:col-start-2 md:row-start-1 md:flex md:min-h-0 md:flex-col md:gap-4 md:overflow-y-auto md:pb-2">
-            {titleHeader}
+          <aside className="order-3 hidden md:col-start-2 md:row-start-2 md:flex md:min-h-0 md:flex-col md:overflow-y-auto md:pb-2">
             <ChoiceCalendar picks={pickMap} />
           </aside>
         </section>
