@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CandyBackground } from "@/components/candy/CandyBackground";
 import { ChoiceCalendar } from "@/components/candy/ChoiceCalendar";
+import { LandedTreatPicture } from "@/components/candy/LandedTreatPicture";
 import { WheelDesignSelect } from "@/components/candy/WheelDesignSelect";
 import { PrizeWheel } from "@/components/candy/PrizeWheel";
 import { DEFAULT_WHEEL_DESIGN_ID, type WheelDesignId } from "@/data/wheelThemes";
@@ -77,6 +78,16 @@ export default function CandyRoom() {
         ? `Saved today: ${todayPick.label}`
         : "Tap Spin in the center to reveal today’s treat";
 
+  const revealTreat: { label: string; category: TreatCategory; eyebrow: string } | null = picked
+    ? { label: picked.label, category: picked.category, eyebrow: "Landed treat" }
+    : !busy && todayPick
+      ? {
+          label: todayPick.label,
+          category: todayPick.category ?? categoryForTreatLabel(todayPick.label) ?? "candy",
+          eyebrow: "Saved treat",
+        }
+      : null;
+
   const titleHeader = (
     <header className={`${panelClass} shrink-0 px-5 py-4 text-center sm:px-6 sm:py-5`}>
       <p className={eyebrowClass}>Daily candy picker</p>
@@ -139,6 +150,14 @@ export default function CandyRoom() {
           >
             <div className="flex min-h-0 flex-1 flex-col gap-2.5 rounded-[1.4rem] bg-gradient-to-b from-white/75 via-white/55 to-violet-50/70 px-2 py-2 ring-1 ring-purple-950/5 sm:gap-3 sm:px-4 sm:py-5">
               {spinMetaStrip}
+              {revealTreat ? (
+                <LandedTreatPicture
+                  label={revealTreat.label}
+                  category={revealTreat.category}
+                  eyebrow={revealTreat.eyebrow}
+                  className="mx-auto w-full max-w-2xl"
+                />
+              ) : null}
               <div className="flex min-h-0 flex-1 flex-col items-stretch gap-3">
                 <PrizeWheel
                   className="min-h-0 flex-1"
